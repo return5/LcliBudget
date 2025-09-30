@@ -1,4 +1,5 @@
 local Screen <const> = require('screens.Screen')
+local setmetatable <const> = setmetatable
 
 local MonthlyNet <const> = {}
 MonthlyNet.__Index = MonthlyNet
