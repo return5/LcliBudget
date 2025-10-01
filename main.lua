@@ -5,9 +5,11 @@ local MonthlyIncome <const> = require('screens.monthly.MonthlyIncome')
 local YearlyExpense <const> = require('screens.yearly.YearlyExpense')
 local YearlyIncome <const> = require('screens.yearly.YearlyIncome')
 local YearlyNet <const> = require('screens.yearly.YearlyNet')
+local NewEntry <const> = require('screens.NewEntry')
 
 local function main()
-	YearlyNet:new():setRange():callDb():printResults()
+--	NewEntry:new():execute(arg)
+	MonthlyNet:new():execute()
 end
 
 main()

@@ -17,7 +17,8 @@ end
 local db <const> = openDb()
 
 function Database.insertRow(date,value,note)
-	db:exec(sFormat("insert INTO TABLE (date,amount,note) VALUES (%s,%s,%s,);",date,value,note or ""))
+	local query <const> = sFormat('insert INTO budget (date,amount,note) VALUES ("%s",%s,"%s");',date,value,note or "")
+	db:exec(query)
 	return Database
 end
 

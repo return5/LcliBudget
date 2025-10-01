@@ -18,7 +18,6 @@ addZerosToDate()
 
 function Screen:callDb()
 	local query <const> = sFormat('%s %s AND %s %s',Screen.query,self.startRange,self.stopRange,self.amountObj.query)
-	write("calling bd with query: ",query,"\n")
 	self.results = Database.selectRows(query)
 	return self
 end
@@ -56,6 +55,11 @@ function Screen:getTodayDate()
 end
 
 function Screen:setRange()
+	return self
+end
+
+function Screen:execute()
+	self:setRange():callDb():printResults()
 	return self
 end
 

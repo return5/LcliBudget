@@ -1,4 +1,4 @@
-local Expense <const> = require('screens.ammounts.Expense')
+local Expense <const> = require('screens.amounts.Expense')
 local setmetatable <const> = setmetatable
 
 local RangeExpense <const> = {}
