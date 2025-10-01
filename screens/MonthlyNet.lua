@@ -1,20 +1,15 @@
-local Screen <const> = require('screens.Screen')
+local Net <const> = require('screens.Net')
+local MonthlyScreen <const> = require('screens.MonthlyScreen')
 local setmetatable <const> = setmetatable
 
 local MonthlyNet <const> = {}
-MonthlyNet.__Index = MonthlyNet
-setmetatable(MonthlyNet,Screen)
+MonthlyNet.__index = MonthlyNet
+setmetatable(MonthlyNet,MonthlyScreen)
 
 _ENV = MonthlyNet
 
 function MonthlyNet:new()
-	return setmetatable(Screen:new(),self)
-end
-
-local monthlyNet <const> = MonthlyNet:new()
-
-function MonthlyNet.getInstance()
-	return monthlyNet
+	return setmetatable(MonthlyScreen:new(Net:new()),self)
 end
 
 return MonthlyNet

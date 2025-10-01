@@ -1,20 +1,14 @@
-local Screen <const> = require('screens.Screen')
+local Expense <const> = require('screens.Expense')
+local setmetatable <const> = setmetatable
 
 local RangeExpense <const> = {}
-RangeExpense.__Index = RangeExpense
-setmetatable(RangeExpense,Screen)
+RangeExpense.__index = RangeExpense
+setmetatable(RangeExpense,Expense)
 
 _ENV = RangeExpense
 
 function RangeExpense:new()
-	return setmetatable(Screen:new(),self)
+	return setmetatable(Expense:new(),self)
 end
-
-local rangeExpense <const> = RangeExpense:new()
-
-function RangeExpense.getInstance()
-	return rangeExpense
-end
-
 
 return RangeExpense

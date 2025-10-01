@@ -1,10 +1,10 @@
 local Database <const> = require('database.Database')
 local setmetatable <const> = setmetatable
-local pairs <const> = pairs
 local write <const> = io.write
 local date <const> = os.date
+local sFormat <const> = string.format
 
-local Screen <const> = {query = "SELECT date, amount,note from budget where ",date = date("*t")}
+local Screen <const> = {query = "SELECT date, amount,note FROM budget WHERE date BETWEEN",date = date("*t")}
 Screen.__index = Screen
 
 _ENV = Screen
@@ -17,24 +17,50 @@ end
 addZerosToDate()
 
 function Screen:callDb()
-	write("calling bd with query: ",Screen.query .. self.query,"\n")
-	self.results = Database.selectRows(Screen.query .. self.query)
+	local query <const> = sFormat('%s %s AND %s %s',Screen.query,self.startRange,self.stopRange,self.amountObj.query)
+	write("calling bd with query: ",query,"\n")
+	self.results = Database.selectRows(query)
 	return self
 end
 
 function Screen:printResults()
-	local total = 0
 	for i=1,#self.results,1  do
 		local row <const> = self.results[i]
 		write(row.date," | ",row.amount, " | ", row.note,"\n")
-		total = total + row.amount
+		self.amountObj:addToTotal(row.amount)
 	end
-	write("total: ",total,"\n")
+	self.amountObj:print()
 	return self
 end
 
-function Screen:new()
-	return setmetatable({results = {}},self)
+function Screen:setStartRange(startDate)
+	self.startRange = startDate
+	return self
+end
+
+function Screen:setStopRange(stopDate)
+	self.stopRange = stopDate
+	return self
+end
+
+function Screen:getStartYearDate()
+	return sFormat('"%s-%s-%s"',Screen.date.year,'01','01')
+end
+
+function Screen:getStartMonthDate()
+	return sFormat('"%s-%s-%s"',Screen.date.year,Screen.date.month,'01')
+end
+
+function Screen:getTodayDate()
+	return sFormat('"%s-%s-%s"',Screen.date.year,Screen.date.month,Screen.date.day)
+end
+
+function Screen:setRange()
+	return self
+end
+
+function Screen:new(amountObj)
+	return setmetatable({results = {},amountObj = amountObj },self)
 end
 
 return Screen
