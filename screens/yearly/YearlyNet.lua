@@ -1,5 +1,5 @@
-local YearlyScreen <const> = require('screens.YearlyScreen')
-local Net <const> = require('screens.Net')
+local YearlyScreen <const> = require('screens.yearly.YearlyScreen')
+local Net <const> = require('screens.amounts.Net')
 
 local setmetatable <const> = setmetatable
 

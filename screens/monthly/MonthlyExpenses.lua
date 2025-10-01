@@ -1,5 +1,5 @@
-local Expense <const> = require('screens.Expense')
-local MonthlyScreen <const> = require('screens.MonthlyScreen')
+local Expense <const> = require('screens.amounts.Expense')
+local MonthlyScreen <const> = require('screens.monthly.MonthlyScreen')
 
 local setmetatable <const> = setmetatable
 
