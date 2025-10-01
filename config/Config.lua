@@ -1,3 +1,4 @@
+
 --[[
 	This file is part of LcliBudget.
 
@@ -6,22 +7,7 @@
 	You should have received a copy of the GNU General Public License along with cliBudget. If not, see <https://www.gnu.org/licenses/>.
 ]]
 
-local Screen <const> = require('screens.Screen')
-
-local setmetatable <const> = setmetatable
-
-local YearlyScreen <const> = {}
-YearlyScreen.__index = YearlyScreen
-setmetatable(YearlyScreen,Screen)
-
-_ENV = YearlyScreen
-
-function YearlyScreen:new(amountObj)
-	return setmetatable(Screen:new(amountObj),self)
-end
-
-function YearlyScreen:setRange()
-	return self:setStopRange(self:getTodayDate()):setStartRange(self:getStartYearDate())
-end
-
-return YearlyScreen
+return {
+	location = '/home/chris/Documents/books/budget.sqlite',
+	tableName = "budget"
+}
