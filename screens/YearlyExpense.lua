@@ -1,19 +1,16 @@
-local Screen <const> = require('screens.Screen')
+local YearlyScreen <const> = require('screens.YearlyScreen')
+local Expense <const> = require('screens.Expense')
+
+local setmetatable <const> = setmetatable
 
 local YearlyExpense <const> = {}
-YearlyExpense.__Index = YearlyExpense
-setmetatable(YearlyExpense,Screen)
+YearlyExpense.__index = YearlyExpense
+setmetatable(YearlyExpense,YearlyScreen)
 
 _ENV = YearlyExpense
 
 function YearlyExpense:new()
-	return setmetatable(Screen:new(),self)
-end
-
-local yearlyExpense <const> = YearlyExpense:new()
-
-function YearlyExpense.getInstance()
-	return yearlyExpense
+	return setmetatable(YearlyScreen:new(Expense:new()),self)
 end
 
 return YearlyExpense
