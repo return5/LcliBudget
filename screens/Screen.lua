@@ -17,7 +17,8 @@ end
 addZerosToDate()
 
 function Screen:callDb()
-	local query <const> = sFormat('%s %s AND %s %s',Screen.query,self.startRange,self.stopRange,self.amountObj.query)
+	local query <const> = sFormat('%s %s AND %s %s ORDER BY date DESC',Screen.query,self.startRange,self.stopRange,self.amountObj.query)
+	write("query is: ",query,"\n")
 	self.results = Database.selectRows(query)
 	return self
 end
@@ -33,33 +34,33 @@ function Screen:printResults()
 end
 
 function Screen:setStartRange(startDate)
-	self.startRange = startDate
+	self.startRange = sFormat('"%s"',startDate)
 	return self
 end
 
 function Screen:setStopRange(stopDate)
-	self.stopRange = stopDate
+	self.stopRange = sFormat('"%s"',stopDate)
 	return self
 end
 
 function Screen:getStartYearDate()
-	return sFormat('"%s-%s-%s"',Screen.date.year,'01','01')
+	return sFormat('%s-%s-%s',Screen.date.year,'01','01')
 end
 
 function Screen:getStartMonthDate()
-	return sFormat('"%s-%s-%s"',Screen.date.year,Screen.date.month,'01')
+	return sFormat('%s-%s-%s',Screen.date.year,Screen.date.month,'01')
 end
 
 function Screen:getTodayDate()
-	return sFormat('"%s-%s-%s"',Screen.date.year,Screen.date.month,Screen.date.day)
+	return sFormat('%s-%s-%s',Screen.date.year,Screen.date.month,Screen.date.day)
 end
 
 function Screen:setRange()
 	return self
 end
 
-function Screen:execute()
-	self:setRange():callDb():printResults()
+function Screen:execute(arg)
+	self:setRange(arg):callDb():printResults()
 	return self
 end
 

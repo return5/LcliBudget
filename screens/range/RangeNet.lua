@@ -1,19 +1,16 @@
-local Screen <const> = require('screens.Screen')
+local RangeScreen <const> = require('screens.range.RangeScreen')
+local Net <const> = require('screens.amounts.Net')
+
+local setmetatable <const> = setmetatable
 
 local RangeNet <const> = {}
-RangeNet.__Index = RangeNet
-setmetatable(RangeNet,Screen)
+RangeNet.__index = RangeNet
+setmetatable(RangeNet, RangeScreen)
 
 _ENV = RangeNet
 
 function RangeNet:new()
-	return setmetatable(Screen:new(),self)
-end
-
-local rangeNet <const> = RangeNet:new()
-
-function RangeNet.getInstance()
-	return rangeNet
+	return setmetatable(RangeScreen:new(Net:new()),self)
 end
 
 return RangeNet

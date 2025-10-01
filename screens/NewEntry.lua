@@ -19,7 +19,7 @@ function NewEntry:execute(args)
 end
 
 function NewEntry:insertNewEntry(args)
-	if #args < 3 then write("exiting: ",#arg,"\n"); exit() end
+	if #args < 3 then exit() end
 	Database.insertRow(args[1],args[2],args[3])
 	return self
 end

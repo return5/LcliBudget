@@ -7,6 +7,7 @@ local YearlyScreen <const> = {}
 YearlyScreen.__index = YearlyScreen
 setmetatable(YearlyScreen,Screen)
 
+_ENV = YearlyScreen
 
 function YearlyScreen:new(amountObj)
 	return setmetatable(Screen:new(amountObj),self)
