@@ -8,6 +8,6 @@
 ]]
 
 return {
-	location = '/home/chris/Documents/books/budget.sqlite',
-	tableName = "budget"
+	location = '',
+	tableName = ""
 }
