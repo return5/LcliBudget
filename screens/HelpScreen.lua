@@ -22,7 +22,7 @@ _ENV = HelpScreen
 HelpScreen.flags = nil --forward declared. set in flag parser to avoid dependency loop.
 
 function HelpScreen:execute()
-	write("command line budget: manage budget from command line.\nlclibudget arg [startRange] [stopRange]\nlclibudet date value [note]\nnotice: date must be in ISO-8601 format\n")
+	write("command line budget: manage budget from command line.\nlclibudget arg [startRange] [stopRange]\nlclibudet date value [note]\nlclibudget value [note]\nnotice: date must be in ISO-8601 format\n")
 	for _,flag in pairs (self.flags) do
 		flag:print()
 	end

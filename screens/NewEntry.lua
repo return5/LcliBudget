@@ -10,6 +10,8 @@ local Screen <const> = require('screens.Screen')
 local Database <const> = require('database.Database')
 local exit <const> = os.exit
 local setmetatable <const> = setmetatable
+local match <const> = string.match
+local stdErr <const> = io.stderr
 
 local NewEntry <const> = {}
 NewEntry.__index = NewEntry
@@ -25,9 +27,33 @@ function NewEntry:execute(args)
 	return self:insertNewEntry(args)
 end
 
+function NewEntry:getDate(date)
+	if not self.checkDateFormat(date) then return self:getTodayDate() end
+	return date
+end
+
+local function checkForNumber(str)
+	return match(str,'^%-?[%d.]+$')
+end
+
+local function getAmount(args)
+	for i=1,#args,1 do
+		if checkForNumber(args[i]) then return args[i] end
+	end
+	stdErr:write("Error: did no include an amount\n")
+	exit()
+end
+
+local function getNote(amount,args)
+	if #args == 3 then return args[3] end
+	return amount ~= args[2] and args[2] or args[3]
+end
+
 function NewEntry:insertNewEntry(args)
-	if #args < 3 then exit() end
-	Database.insertRow(args[1],args[2],args[3])
+	local date <const> = self:getDate(args[1])
+	local amount <const> = getAmount(args)
+	local note <const> = getNote(amount,args)
+	Database.insertRow(date,amount,note)
 	return self
 end
 

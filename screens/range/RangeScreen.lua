@@ -9,9 +9,8 @@
 local Screen <const> = require('screens.Screen')
 
 local exit <const> = os.exit
+local stdErr <const> = io.stderr
 local setmetatable <const> = setmetatable
-local match <const> = string.match
-local write <const> = io.write
 
 
 local RangeScreen <const> = {}
@@ -24,13 +23,9 @@ function RangeScreen:new(amountObj)
 	return setmetatable(Screen:new(amountObj),self)
 end
 
-local function checkDateFormat(date)
-	return match(date,".+%-.+%-.+")
-end
-
 function RangeScreen:grabStartRange(args)
-	if not args[1] then write("not args[1\n"); exit() end
-	if not checkDateFormat(args[1]) then write("not checks format\n"); exit() end
+	if not args[1] then stdErr:write("Error: no range given.\n"); exit() end
+	if not self.checkDateFormat(args[1]) then stdErr:write("Error: Invalid range format given.\n"); exit() end
 	self:setStartRange(args[1])
 	return self
 end
@@ -38,7 +33,7 @@ end
 function RangeScreen:grabStopRange(args)
 	if not args[2] then
 		self:setStopRange(self:getTodayDate())
-	elseif not checkDateFormat(args[2]) then
+	elseif not self.checkDateFormat(args[2]) then
 		exit()
 	else
 		self:setStopRange(args[2])

@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 --[[
 	LcliBudget: command line program for doing simple budgeting.
     Copyright (C) <2022>  <return5>
@@ -7,7 +8,21 @@
     You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ]]
+
+local source <const> = debug.getinfo(1).source:match("@(.+/).-%.lua") or ""
+package.path = package.path .. ";".. source .."?.lua"
+
+local function setPath()
+	local pipe <const> = io.popen('echo "$PWD"')
+	local dir <const> =  pipe:read()
+	pipe:close()
+	package.path =  dir .. "/?.lua;" .. package.path
+end
+
+setPath()
+
 local FlagParser <const> = require('flagParser.FlagParser')
+
 
 local function main()
 	FlagParser:new():parse(arg):execute(arg)

@@ -9,10 +9,11 @@
 local Database <const> = require('database.Database')
 local setmetatable <const> = setmetatable
 local write <const> = io.write
-local date <const> = os.date
+local osDate <const> = os.date
 local sFormat <const> = string.format
+local match <const> = string.match
 
-local Screen <const> = {query = "SELECT date, amount,note FROM budget WHERE date BETWEEN",date = date("*t")}
+local Screen <const> = {query = "SELECT date, amount,note FROM budget WHERE date BETWEEN",date = osDate("*t")}
 Screen.__index = Screen
 
 _ENV = Screen
@@ -38,6 +39,10 @@ function Screen:printResults()
 	end
 	self.amountObj:print()
 	return self
+end
+
+function Screen.checkDateFormat(date)
+	return match(date,".+%-.+%-.+")
 end
 
 function Screen:setStartRange(startDate)

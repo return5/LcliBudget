@@ -9,8 +9,8 @@
 local sqlite3 <const> = require('lsqlite3complete')
 local Config <const> = require('config.Config')
 local exit <const> = os.exit
+local stdErr <const> = io.stderr
 local sFormat <const> = string.format
-local write <const> = io.write
 
 local Database <const> = {}
 Database.__index = Database
@@ -19,7 +19,7 @@ _ENV = Database
 
 local function openDb()
 	local db <const>, _, errorMessage <const> = sqlite3.open(Config.location)
-	if not db then write(errorMessage,"\n"); exit() end
+	if not db then stdErr:write(errorMessage,"\n"); exit() end
 	return db
 end
 
