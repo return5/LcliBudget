@@ -9,5 +9,5 @@
 
 return {
 	location = '',
-	tableName = ""
+	tableName = ''
 }

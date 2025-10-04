@@ -68,6 +68,7 @@ function Screen:getTodayDate()
 end
 
 function Screen:setRange()
+	write("Setting range in screen\n")
 	return self
 end
 

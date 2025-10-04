@@ -40,7 +40,7 @@ local function getAmount(args)
 	for i=1,#args,1 do
 		if checkForNumber(args[i]) then return args[i] end
 	end
-	stdErr:write("Error: did no include an amount\n")
+	stdErr:write("Error: did not include an amount\n")
 	exit()
 end
 

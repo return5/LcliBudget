@@ -26,7 +26,7 @@ return {
 	['-E'] = Flag:new('-E','print year to date expenses',YearlyExpenses:new()),
 	['-I'] = Flag:new('-I','print year to date income',YearlyIncome:new()),
 	['-y'] = Flag:new('-y',"print year to date net total",YearlyNet:new()),
-	['-'] = Flag:new('-s','print expenses for range',RangeExpense:new()),
-	['-'] = Flag:new('-p','print income for range',RangeIncome:new()),
+	['-s'] = Flag:new('-s','print expenses for range',RangeExpense:new()),
+	['-p'] = Flag:new('-p','print income for range',RangeIncome:new()),
 	['-r'] = Flag:new('-r','print net total for range',RangeNet:new())
 }
