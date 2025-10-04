@@ -21,9 +21,8 @@ _ENV = FlagParser
 HelpScreen.flags = Flags
 
 function FlagParser:parse(args)
-	write("arg[1] is: ",args[1],"\n")
 	if not args or #args == 0 then return Flags['-h'].screen end
-	if Flags[args[1]] then write("returning arg\n"); return Flags[args[1]].screen end
+	if Flags[args[1]] then return Flags[args[1]].screen end
 	return NewEntry:new()
 end
 

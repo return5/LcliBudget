@@ -11,8 +11,6 @@ local Screen <const> = require('screens.Screen')
 local exit <const> = os.exit
 local stdErr <const> = io.stderr
 local setmetatable <const> = setmetatable
-local write <const> = io.write
-
 
 local RangeScreen <const> = {}
 RangeScreen.__index = RangeScreen
@@ -25,7 +23,6 @@ function RangeScreen:new(amountObj)
 end
 
 function RangeScreen:grabStartRange(args)
-	write("setting start range\n")
 	if not args[2] then stdErr:write("Error: no range given.\n"); exit() end
 	if not self.checkDateFormat(args[2]) then stdErr:write("Error: Invalid range format given.\n"); exit() end
 	self:setStartRange(args[2])
@@ -44,10 +41,6 @@ function RangeScreen:grabStopRange(args)
 end
 
 function RangeScreen:setRange(args)
-	write("#args is: ",#args,"\n")
-	for i=1,#args,1 do
-		write(args[i],"\n")
-	end
 	return self:grabStartRange(args):grabStopRange(args)
 end
 
