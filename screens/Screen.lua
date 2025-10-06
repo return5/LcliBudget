@@ -7,13 +7,15 @@
 ]]
 
 local Database <const> = require('database.Database')
+local Config <const> = require('config.Config')
+
 local setmetatable <const> = setmetatable
 local write <const> = io.write
 local osDate <const> = os.date
 local sFormat <const> = string.format
 local match <const> = string.match
 
-local Screen <const> = {query = "SELECT date, amount,note FROM budget WHERE date BETWEEN",date = osDate("*t")}
+local Screen <const> = {query = sFormat("SELECT date, amount,note FROM %s WHERE date BETWEEN",Config.tableName),date = osDate("*t")}
 Screen.__index = Screen
 
 _ENV = Screen
