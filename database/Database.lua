@@ -25,6 +25,12 @@ end
 
 local db <const> = openDb()
 
+function Database.removeRow(id)
+	local query <const> = sFormat('delete from %s where id = %s;',Config.tableName,id);
+	db:exec(query)
+	return Database
+end
+
 function Database.insertRow(date,value,note)
 	local query <const> = sFormat('insert INTO %s(date,amount,note) VALUES ("%s",%s,"%s");',Config.tableName,date,value,note or "")
 	db:exec(query)

@@ -17,6 +17,7 @@ local RangeIncome <const> = require('screens.range.RangeIncome')
 local RangeNet <const> = require('screens.range.RangeNet')
 local HelpScreen <const> = require('screens.HelpScreen')
 local Flag <const> = require('flagParser.Flag')
+local Delete <const> = require('screens.Delete')
 
 return {
 	['-h'] = Flag:new('-h',"print help page",HelpScreen:new()),
@@ -28,5 +29,6 @@ return {
 	['-y'] = Flag:new('-y',"print year to date net total",YearlyNet:new()),
 	['-s'] = Flag:new('-s','print expenses for range',RangeExpense:new()),
 	['-p'] = Flag:new('-p','print income for range',RangeIncome:new()),
-	['-r'] = Flag:new('-r','print net total for range',RangeNet:new())
+	['-r'] = Flag:new('-r','print net total for range',RangeNet:new()),
+	['-d'] = Flag:new('-d','delete row based upon row id.',Delete:new())
 }

@@ -15,7 +15,7 @@ local osDate <const> = os.date
 local sFormat <const> = string.format
 local match <const> = string.match
 
-local Screen <const> = {query = sFormat("SELECT date, amount,note FROM %s WHERE date BETWEEN",Config.tableName),date = osDate("*t")}
+local Screen <const> = {query = sFormat("SELECT id, date, amount,note FROM %s WHERE date BETWEEN",Config.tableName),date = osDate("*t")}
 Screen.__index = Screen
 
 _ENV = Screen
@@ -36,7 +36,7 @@ end
 function Screen:printResults()
 	for i=1,#self.results,1  do
 		local row <const> = self.results[i]
-		write(row.date," | ",row.amount, " | ", row.note,"\n")
+		write(row.id," | ",row.date," | ",row.amount, " | ", row.note,"\n")
 		self.amountObj:addToTotal(row.amount)
 	end
 	self.amountObj:print()
